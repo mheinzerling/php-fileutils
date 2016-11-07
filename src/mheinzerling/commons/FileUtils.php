@@ -9,17 +9,22 @@ class FileUtils
     const UNIX = "/";
 
     /**
+     * @param string $path
      * @param $separator String FileUtils::WIN,FileUtils::NS,FileUtils::UNIX
+     * @return string
      */
-    public static function to($path, $separator)
+    public static function to(string $path, string $separator):string
     {
-        return str_replace(array(self::WIN, self::UNIX), $separator, $path);
+        return str_replace([self::WIN, self::UNIX], $separator, $path);
     }
 
     /**
+     * @param string $path
+     * @param string $sub
      * @param $separator String FileUtils::WIN,FileUtils::NS,FileUtils::UNIX
+     * @return string|null
      */
-    public static function append($path, $sub, $separator = self::UNIX)
+    public static function append(string $path = null, string $sub = null, $separator = self::UNIX)
     {
         if (StringUtils::isBlank($path)) return $sub;
         if (StringUtils::isBlank($sub)) return $path;
@@ -32,19 +37,21 @@ class FileUtils
         return $path . $sub;
     }
 
-    public static function createFile($file, $content)
+    public static function createFile(string $file, string $content):int
     {
         $dir = dirname($file);
         if (!file_exists($dir)) mkdir(dirname($file), 0777, true);
-        file_put_contents($file, $content);
+        return file_put_contents($file, $content);
     }
 
     /**
      * Will find the basename also of windows paths/name spaces on linux. Suffix is php4 behaviour and removed first.
      *
-     * @param $path
+     * @param string $path
+     * @param string $suffix
+     * @return string
      */
-    public static function basename($path, $suffix = null)
+    public static function basename(string $path = null, string $suffix = null):string
     {
         if ($suffix != null && StringUtils::endsWith($path, $suffix)) {
             $path = substr($path, 0, -strlen($suffix));

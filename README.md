@@ -6,7 +6,7 @@ File utils
 
 ##Composer
     "require": {
-        "mheinzerling/fileutils": "2.0.*"
+        "mheinzerling/fileutils": "^2.0.1"
     },
   
 ##Changelog
