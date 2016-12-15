@@ -1,4 +1,5 @@
 <?php
+declare(strict_types = 1);
 namespace mheinzerling\commons;
 
 
@@ -13,7 +14,7 @@ class FileUtils
      * @param $separator String FileUtils::WIN,FileUtils::NS,FileUtils::UNIX
      * @return string
      */
-    public static function to(string $path, string $separator):string
+    public static function to(string $path, string $separator): string
     {
         return str_replace([self::WIN, self::UNIX], $separator, $path);
     }
@@ -24,7 +25,7 @@ class FileUtils
      * @param $separator String FileUtils::WIN,FileUtils::NS,FileUtils::UNIX
      * @return string|null
      */
-    public static function append(string $path = null, string $sub = null, $separator = self::UNIX)
+    public static function append(string $path = null, string $sub = null, $separator = self::UNIX):?string
     {
         if (StringUtils::isBlank($path)) return $sub;
         if (StringUtils::isBlank($sub)) return $path;
@@ -37,7 +38,7 @@ class FileUtils
         return $path . $sub;
     }
 
-    public static function createFile(string $file, string $content):int
+    public static function createFile(string $file, string $content): int
     {
         $dir = dirname($file);
         if (!file_exists($dir)) mkdir(dirname($file), 0777, true);
@@ -51,8 +52,9 @@ class FileUtils
      * @param string $suffix
      * @return string
      */
-    public static function basename(string $path = null, string $suffix = null):string
+    public static function basename(string $path = null, string $suffix = null): string
     {
+        if ($path == null) return "";
         if ($suffix != null && StringUtils::endsWith($path, $suffix)) {
             $path = substr($path, 0, -strlen($suffix));
         }
