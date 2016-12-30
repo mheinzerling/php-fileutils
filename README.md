@@ -6,16 +6,17 @@ File utils
 
 ##Composer
     "require": {
-        "mheinzerling/fileutils": "^2.0.1"
+        "mheinzerling/fileutils": "^3.0.0"
     },
   
 ##Changelog
 
 ### 3.0.0
-update to PHP 7.1
+* update to PHP 7.1
+* Separator enum
 
 ### 2.0.0
-update to PHP 7
+* update to PHP 7
 
 ### 1.0.0
-initial version 
+* initial version 

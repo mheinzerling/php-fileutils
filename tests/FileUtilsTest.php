@@ -4,6 +4,25 @@ namespace mheinzerling\commons;
 
 class FileUtilsTest extends \PHPUnit_Framework_TestCase
 {
+    public function testTo()
+    {
+        static::assertEquals("", FileUtils::to("", Separator::WIN()));
+        static::assertEquals("", FileUtils::to("", Separator::UNIX()));
+        static::assertEquals("", FileUtils::to("", Separator::NS()));
+        static::assertEquals("\\", FileUtils::to("/", Separator::WIN()));
+        static::assertEquals("/", FileUtils::to("/", Separator::UNIX()));
+        static::assertEquals("\\", FileUtils::to("/", Separator::NS()));
+        static::assertEquals("\\", FileUtils::to("\\", Separator::WIN()));
+        static::assertEquals("/", FileUtils::to("\\", Separator::UNIX()));
+        static::assertEquals("\\", FileUtils::to("\\", Separator::NS()));
+        static::assertEquals("\\foo\\bar\\", FileUtils::to("\\foo\\bar\\", Separator::WIN()));
+        static::assertEquals("/foo/bar/", FileUtils::to("\\foo\\bar\\", Separator::UNIX()));
+        static::assertEquals("\\foo\\bar\\", FileUtils::to("\\foo\\bar\\", Separator::NS()));
+        static::assertEquals("\\foo\\bar\\", FileUtils::to("/foo/bar/", Separator::WIN()));
+        static::assertEquals("/foo/bar/", FileUtils::to("/foo/bar/", Separator::UNIX()));
+        static::assertEquals("\\foo\\bar\\", FileUtils::to("/foo/bar/", Separator::NS()));
+    }
+
     public function testAppend()
     {
         static::assertEquals(null, FileUtils::append(null, null));
